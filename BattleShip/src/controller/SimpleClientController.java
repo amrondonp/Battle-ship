@@ -2,55 +2,63 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import lan.SimpleClient;
 import view.SimpleClientFrame;
 
 public class SimpleClientController {
-	private SimpleClient client;
-	private SimpleClientFrame fClient;
-	private static SimpleClientController scc;
+  private SimpleClient client;
+  private SimpleClientFrame fClient;
+  private static SimpleClientController scc;
 
-	public static synchronized SimpleClientController getInstance() {
-		if (scc == null) {
-			scc = new SimpleClientController();
-		}
-		return scc;
-	}
+  public static synchronized SimpleClientController getInstance() {
+    if (scc == null) {
+      scc = new SimpleClientController();
+    }
+    return scc;
+  }
 
-	public SimpleClientController() {
-	}
+  public SimpleClientController() {}
 
-	public SimpleClient getClient() {
-		return client;
-	}
+  public SimpleClient getClient() {
+    return client;
+  }
 
-	public void setClient(SimpleClient client) {
-		this.client = client;
-	}
+  public void setClient(SimpleClient client) {
+    this.client = client;
+  }
 
-	public SimpleClientFrame getfClient() {
-		return fClient;
-	}
+  public SimpleClientFrame getfClient() {
+    return fClient;
+  }
 
-	public void setfClient(SimpleClientFrame fClient) {
-		this.fClient = fClient;
-		fClient.addClientListener(new MyListener());
-	}
+  public void setfClient(SimpleClientFrame fClient) {
+    this.fClient = fClient;
+    fClient.addClientListener(new MyListener());
+  }
 
-	class MyListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
+  class MyListener implements ActionListener {
 
-			String name = fClient.getTextField().getText();
-			fClient.getTextField().setText("");
-			client.setName(name);
-			Controller.getInstance().getTheView().getFrameManOpponent().setVisible(true);
-			Controller.getInstance().getTheView().getFrameManOpponent().getSketch().init();
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+      // TODO Auto-generated method stub
 
-			client.start();
-			fClient.setVisible(false);
-		}
-	}
+      String name = fClient.getTextField().getText();
+      fClient.getTextField().setText("");
+      client.setName(name);
+      Controller
+        .getInstance()
+        .getTheView()
+        .getFrameManOpponent()
+        .setVisible(true);
+      Controller
+        .getInstance()
+        .getTheView()
+        .getFrameManOpponent()
+        .getSketch()
+        .init();
+
+      client.start();
+      fClient.setVisible(false);
+    }
+  }
 }

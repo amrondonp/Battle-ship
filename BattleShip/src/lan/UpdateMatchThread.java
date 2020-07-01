@@ -1,31 +1,29 @@
 package lan;
 
 public class UpdateMatchThread implements Runnable {
+  private ServerPlayers sp;
+  private Thread thread;
+  private int index;
 
-	private ServerPlayers sp;
-	private Thread thread;
-	private int index;
+  public UpdateMatchThread(ServerPlayers sp, int index) {
+    this.index = index;
+    this.sp = sp;
+    thread = new Thread(this, "UpdateMatch");
+  }
 
-	public UpdateMatchThread(ServerPlayers sp, int index) {
-		this.index = index;
-		this.sp = sp;
-		thread = new Thread(this, "UpdateMatch");
-	}
+  public void start() {
+    this.thread.start();
+  }
 
-	public void start() {
-		this.thread.start();
-	}
-
-	@Override
-	public void run() {
-		while (sp.getState() == 1 && !sp.getServerSocket().isClosed()) {
-			sp.reciveShoots(index);
-			try {
-				Thread.sleep(100);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-	}
+  @Override
+  public void run() {
+    while (sp.getState() == 1 && !sp.getServerSocket().isClosed()) {
+      sp.reciveShoots(index);
+      try {
+        Thread.sleep(100);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
 }
