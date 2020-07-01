@@ -18,18 +18,15 @@ public class UpdateServerThread implements Runnable{
 	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while(sp.getState() == 1 && !sp.getServerSocket().isClosed())
 		{
 			sp.sendMatch();
 			try {
 				Thread.sleep(100);
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 
 		}
 	}
-
 }

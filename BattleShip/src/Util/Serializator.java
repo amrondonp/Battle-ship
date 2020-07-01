@@ -5,21 +5,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
 /**
- * Class in charge to Serialize and Deserialize an Object 
+ * Class in charge to Serialize and Deserialize an Object
+ * 
  * @author Mauricio Rondon
  * @author Julian Pulido
  */
 public class Serializator {
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
+
 	/**
-	 * Write a Serialized Object in a file 
-	 * @param object object to serialize
+	 * Write a Serialized Object in a file
+	 * 
+	 * @param object   object to serialize
 	 * @param fileName file name
 	 */
-	public void writeObject(Object object, String fileName)
-	{
+	public void writeObject(Object object, String fileName) {
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream(fileName));
 			oos.writeObject(object);
@@ -28,13 +31,14 @@ public class Serializator {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * Deserialize an Object from a file
+	 * 
 	 * @param fileName file name
 	 * @return auxObj Object deserialized
 	 */
-	public Object readObject(String fileName)
-	{
+	public Object readObject(String fileName) {
 		Object auxObj = null;
 		try {
 			ois = new ObjectInputStream(new FileInputStream(fileName));

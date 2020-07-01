@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-import Util.Utilities;
 /**
  * Class model of the game batlleShip
  * 
@@ -10,8 +9,7 @@ import Util.Utilities;
  * @author Mauricio Rondon and Julian Pulido
  *
  */
-public class Match implements Serializable
-{
+public class Match implements Serializable {
 	/**
 	 * 
 	 */
@@ -19,7 +17,7 @@ public class Match implements Serializable
 	/**
 	 * the actual turn in the match
 	 */
-	private int turn=0;
+	private int turn = 0;
 	/**
 	 * Match identification
 	 */
@@ -27,70 +25,75 @@ public class Match implements Serializable
 	/**
 	 * First Player
 	 */
-	private  Player one;
+	private Player one;
 	/**
 	 * Second Player
 	 */
-	private  Player two;
-	
+	private Player two;
+
 	/**
-	 * return true if the player (param) is the first player, false if is the two player
+	 * return true if the player (param) is the first player, false if is the two
+	 * player
+	 * 
 	 * @param player
 	 * @return Boolean amIOne
 	 */
-	public boolean amIone(Player player)
-	{
-		if(player==one)
-		{
+	public boolean amIone(Player player) {
+		if (player == one) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Constructor of the class ,Player that was put first will be the first player
+	 * 
 	 * @param one
 	 * @param two
 	 * @param id
 	 */
-	public Match(Player one, Player two,String id) {
+	public Match(Player one, Player two, String id) {
 		this.one = one;
-		one.ID=1;
+		one.ID = 1;
 		this.two = two;
-		two.ID=2;
+		two.ID = 2;
 		this.id = id;
 	}
-	
-	public void Save()
-	{
-		
+
+	public void Save() {
+
 	}
+
 	/**
 	 * Return the firts Playe
+	 * 
 	 * @return Player one
 	 */
-	public  Player getOne() {
+	public Player getOne() {
 		return one;
 	}
-	
+
 	/**
 	 * Return the two player
+	 * 
 	 * @return Player two
 	 */
-	public  Player getTwo() {
+	public Player getTwo() {
 		return two;
 	}
 
 	/**
 	 * return the match id
+	 * 
 	 * @return String id
 	 */
 	public String getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Set The match id
+	 * 
 	 * @param String id
 	 */
 	public void setId(String id) {
@@ -99,6 +102,7 @@ public class Match implements Serializable
 
 	/**
 	 * get the actual turn
+	 * 
 	 * @return turn
 	 */
 	public int getTurn() {
@@ -107,12 +111,11 @@ public class Match implements Serializable
 
 	/**
 	 * set the actual turn
+	 * 
 	 * @param int turn
 	 */
 	public void setTurn(int turn) {
 		this.turn = turn;
 	}
-	
-	
-	
+
 }

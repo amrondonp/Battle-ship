@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -7,8 +8,10 @@ import model.Field;
 import gifAnimation.Gif;
 import Util.Utilities;
 import processing.core.*;
+
 /**
- * Class that contains the sketch to shoot  at the opponent on Man vs CPU mode 
+ * Class that contains the sketch to shoot at the opponent on Man vs CPU mode
+ * 
  * @author Mauricio Rendon
  * @author Julian Pulido
  *
@@ -17,44 +20,47 @@ import processing.core.*;
 public class ProcessingOpponent extends PApplet {
 
 	private static final long serialVersionUID = 1L;
-	XPicture eX  ;
+	XPicture eX;
 	Gif image;
 	private ArrayList<Point> pointsCpu;
-	private Point point = new Point(-50,-50);
+	private Point point = new Point(-50, -50);
 	private boolean aux;
+
 	/**
 	 * initialize the sketch with a grid on board and animations
 	 */
 	public void setup() {
 		pointsCpu = Utilities.allPointsCpu();
 		size(500, 500);
-		background(0,127,255);
+		background(0, 127, 255);
 
 		stroke(225);
-		for (int i = 0; i <= height; i=i+height/10) {//draw the rows
+		for (int i = 0; i <= height; i = i + height / 10) {// draw the rows
 			strokeWeight(2);
-			line(0,i,width,i);
+			line(0, i, width, i);
 		}
 
-		for (int i = 0; i <= width; i=i+width/10) {//draw the columns
+		for (int i = 0; i <= width; i = i + width / 10) {// draw the columns
 			strokeWeight(2);
-			line(i,0,i,height);
+			line(i, 0, i, height);
 		}
 		smooth();
-		image = new Gif(this,"explosion.gif");
+		image = new Gif(this, "explosion.gif");
 	}
+
 	/**
-	 * Repaint constantly the screen  
+	 * Repaint constantly the screen
 	 */
 	public void draw() {
-		if(aux)
-			image(image,point.x*50,point.y*50,50,50);
+		if (aux)
+			image(image, point.x * 50, point.y * 50, 50, 50);
 	}
+
 	/**
-	 * Set a shoot on board and Field when the mouse left button is pressed and plays the CPU
+	 * Set a shoot on board and Field when the mouse left button is pressed and
+	 * plays the CPU
 	 */
 	public void mousePressed() {
-
 
 		aux = false;
 		Field fieldCPU = Controller.getTheOnlyInstance().getTheModel().getTwo().getField();
@@ -62,36 +68,35 @@ public class ProcessingOpponent extends PApplet {
 		ProcessingPlayer processingPlayer = Controller.getTheOnlyInstance().getTheView().getFramePlayer().getSketch();
 		FramePlayerMan framePlayer = Controller.getTheOnlyInstance().getTheView().getFramePlayerMan();
 		FrameOpponent frameOpponent = Controller.getTheOnlyInstance().getTheView().getFrameOpponent();
-		if(mouseButton == LEFT){
-			point = Utilities.getCoordenate(new Point(mouseX,mouseY));
-			//System.out.println(point.toString());
+		if (mouseButton == LEFT) {
+			point = Utilities.getCoordenate(new Point(mouseX, mouseY));
+			// System.out.println(point.toString());
 
-			if(fieldCPU.checkNavyAt(point.y, point.x)){// rows, column
+			if (fieldCPU.checkNavyAt(point.y, point.x)) {// rows, column
 				image.jump(0);
 				image.play();
 				aux = true;
 				fieldCPU.setHit(point.y, point.x);
 
-				//eX = new XPicture((int)point.getX(),(int)point.getY());
-				stroke(139,35,35);
-				//eX.display();//draw a red X (hit)
-				if(fieldCPU.checkForWinner()){
+				// eX = new XPicture((int)point.getX(),(int)point.getY());
+				stroke(139, 35, 35);
+				// eX.display();//draw a red X (hit)
+				if (fieldCPU.checkForWinner()) {
 					framePlayer.displayErrorMessage("You are the winner");
 					framePlayer.setVisible(false);
 					frameOpponent.setVisible(false);
 				}
-				//aux = false;
+				// aux = false;
 				return;
-			}
-			else{
-				eX = new XPicture((int)point.getX(),(int)point.getY());
+			} else {
+				eX = new XPicture((int) point.getX(), (int) point.getY());
 				stroke(0);
 				eX.display();
 			}
-			boolean turn=true;
-			//here the CPU plays
-			do{
-				int index = Utilities.getRandomInteger(0, pointsCpu.size()-1);
+			boolean turn = true;
+			// here the CPU plays
+			do {
+				int index = Utilities.getRandomInteger(0, pointsCpu.size() - 1);
 				turn = fieldMan.setHit(pointsCpu.get(index).y, pointsCpu.get(index).x);
 
 				System.out.println(pointsCpu.get(index).toString());
@@ -101,7 +106,7 @@ public class ProcessingOpponent extends PApplet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if(turn){
+				if (turn) {
 					try {
 						Thread.sleep(300);
 					} catch (InterruptedException e) {
@@ -110,37 +115,40 @@ public class ProcessingOpponent extends PApplet {
 					}
 					processingPlayer.printExplosion(pointsCpu.get(index));
 				}
-				if(!turn){
-					int x = (int)pointsCpu.get(index).x;
-					int y = (int)pointsCpu.get(index).y;
-					processingPlayer.line((x*50),(y*50),((x+1)*50),((y+1)*50));
-					processingPlayer.line(((x+1)*50),((y)*50),(x*50),((y+1)*50));
+				if (!turn) {
+					int x = (int) pointsCpu.get(index).x;
+					int y = (int) pointsCpu.get(index).y;
+					processingPlayer.line((x * 50), (y * 50), ((x + 1) * 50), ((y + 1) * 50));
+					processingPlayer.line(((x + 1) * 50), ((y) * 50), (x * 50), ((y + 1) * 50));
 				}
 				pointsCpu.remove(index);
-				if(fieldMan.checkForWinner()){
+				if (fieldMan.checkForWinner()) {
 					framePlayer.displayErrorMessage("You are the looser");
 					framePlayer.setVisible(false);
 					frameOpponent.setVisible(false);
 				}
 
-			}while(turn);
+			} while (turn);
 
 			/////////////////////////
 		}
 	}
 
 	/**
-	 * Class of a cross figure 
+	 * Class of a cross figure
+	 * 
 	 * @author Mauricio Rondon
 	 * @author Julian Pulido
 	 *
 	 */
-	public class XPicture  {
+	public class XPicture {
 
 		int posX;// both [0,9] as a coordinate of a matrix
 		int posY;
+
 		/**
 		 * The constructor of the Class
+		 * 
 		 * @param posX X coordinates where will be printed
 		 * @param posY y coordinates where will be printed
 		 */
@@ -149,23 +157,22 @@ public class ProcessingOpponent extends PApplet {
 			this.posX = posX;
 			this.posY = posY;
 		}
+
 		/**
 		 * Display the cross on the sketch
 		 */
-		public void display(){
+		public void display() {
 
-
-
-			line((this.posX*50),(this.posY*50),((this.posX+1)*50),((this.posY+1)*50));
-			line(((this.posX+1)*50),((this.posY)*50),(this.posX*50),((this.posY+1)*50));
+			line((this.posX * 50), (this.posY * 50), ((this.posX + 1) * 50), ((this.posY + 1) * 50));
+			line(((this.posX + 1) * 50), ((this.posY) * 50), (this.posX * 50), ((this.posY + 1) * 50));
 		}
+
 		/**
 		 * Constructor without fields
 		 */
 		public XPicture() {
 			super();
 		}
-
 
 	}
 

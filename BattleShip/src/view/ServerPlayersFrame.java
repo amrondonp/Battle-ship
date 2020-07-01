@@ -1,18 +1,23 @@
 package view;
 
-import javax.swing.*;
-
-import Util.Serializator;
-import lan.NewGameThread;
-import model.Match;
-import controller.ServerPlayersController;
-
-import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import Util.Serializator;
+import controller.ServerPlayersController;
+import model.Match;
+
 /**
  * Class of the Frame to start a new Server, LAN mode
+ * 
  * @author Mauricio Rendon
  * @author Julian Pulido
  * @version 1.0
@@ -20,30 +25,34 @@ import java.awt.event.ActionEvent;
 public class ServerPlayersFrame extends JFrame {
 	private JLabel label = new JLabel("default");
 	ServerPlayersController controller;
-	private JLabel label1 =  new JLabel("default");
-	private JButton btnEnviar = new JButton("Enviar"); 
+	private JLabel label1 = new JLabel("default");
+	private JButton btnEnviar = new JButton("Enviar");
 
 	/**
 	 * get the Label Object of label
+	 * 
 	 * @return label
 	 */
 	public JLabel getLabel() {
 		return label;
 	}
+
 	/**
 	 * get the Label Object of label1
+	 * 
 	 * @return label1
 	 */
 	public JLabel getLabel1() {
 		return label1;
 	}
+
 	/**
-	 * Create the Frame 
+	 * Create the Frame
 	 */
 	public ServerPlayersFrame() {
 		super("Jugadores");
 		getContentPane().setLayout(null);
-		setSize(300,300);
+		setSize(300, 300);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setToolTipText("Default\r\n");
 		label.setBounds(10, 46, 264, 24);
@@ -67,7 +76,7 @@ public class ServerPlayersFrame extends JFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Match game  =ServerPlayersController.getInstance().getSp().getGame();
+				Match game = ServerPlayersController.getInstance().getSp().getGame();
 				Serializator s = new Serializator();
 				s.writeObject(game, "game.txt");
 				JOptionPane.showMessageDialog(null, "Guerdado correctamente");
@@ -79,9 +88,9 @@ public class ServerPlayersFrame extends JFrame {
 		JButton btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//NewGameThread.createPlayerServer();
+				// NewGameThread.createPlayerServer();
 				Serializator s = new Serializator();
-				Match game = (Match)s.readObject("game.txt");
+				Match game = (Match) s.readObject("game.txt");
 				ServerPlayersController.getInstance().getSp().setIsload(true);
 				ServerPlayersController.getInstance().getSp().setMatch(game);
 				JOptionPane.showMessageDialog(null, "Cargado correctamente");
@@ -97,14 +106,16 @@ public class ServerPlayersFrame extends JFrame {
 
 	/**
 	 * add a ActionListener to the button btnEnviar
+	 * 
 	 * @param listener the ActionListener to add
 	 */
-	public void addListener1 (ActionListener listener)
-	{
+	public void addListener1(ActionListener listener) {
 		this.btnEnviar.addActionListener(listener);
 	}
+
 	/**
 	 * Get the JTextField Object of the Frame
+	 * 
 	 * @return textField
 	 */
 	public JTextField getTextField() {

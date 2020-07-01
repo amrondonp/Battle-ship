@@ -10,33 +10,38 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+
 /**
  * Class of the Frame of the Client to join at a Server, LAN mode
+ * 
  * @author Mauricio Rendon
  * @author Julian Pulido
- *  @version 1.0
+ * @version 1.0
  */
-public class SimpleClientFrame extends JFrame{
+public class SimpleClientFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JButton btnEnviar = new JButton("Enviar");
+
 	/**
 	 * Get the JButton Object of btnEnviar
+	 * 
 	 * @return btnEnviar
 	 */
-	public JButton getBtnEnviar()
-	{
+	public JButton getBtnEnviar() {
 		return btnEnviar;
 	}
+
 	/**
 	 * add an ActionListener to the button btnEnviar
+	 * 
 	 * @param listener the ActionListener to add
 	 */
-	public void addClientListener(ActionListener listener)
-	{
+	public void addClientListener(ActionListener listener) {
 		this.btnEnviar.addActionListener(listener);
 	}
+
 	/**
 	 * Creates the frame
 	 */
@@ -54,8 +59,7 @@ public class SimpleClientFrame extends JFrame{
 		lblNombre.setBounds(32, 60, 46, 14);
 		getContentPane().add(lblNombre);
 
-
-		//btnEnviar.addActionListener(controller); 
+		// btnEnviar.addActionListener(controller);
 		btnEnviar.setBounds(68, 99, 89, 23);
 		getContentPane().add(btnEnviar);
 
@@ -67,20 +71,22 @@ public class SimpleClientFrame extends JFrame{
 		lblJugadorNuevo.setBounds(32, 11, 155, 30);
 		getContentPane().add(lblJugadorNuevo);
 	}
+
 	/**
 	 * Get the JTextField Object of textField
+	 * 
 	 * @return textField
 	 */
-	public JTextField getTextField()
-	{
+	public JTextField getTextField() {
 		return this.textField;
 	}
+
 	/**
-	 * display on screen a Message 
+	 * display on screen a Message
+	 * 
 	 * @param errorMsg the String to show
 	 */
-	public static void displayMessage( String errorMsg )
-	{
+	public static void displayMessage(String errorMsg) {
 		JOptionPane.showMessageDialog(null, errorMsg);
 	}
 }

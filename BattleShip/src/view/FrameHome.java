@@ -1,33 +1,32 @@
 package view;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-import javax.swing.SwingConstants;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 /**
- * Class that contains the  JFrame with the buttons of game modes 
+ * Class that contains the JFrame with the buttons of game modes
+ * 
  * @author Mauricio Rondon
  * @author Julian Pulido
  * @version 1.0
  */
 
 public class FrameHome extends JFrame {
+	private static final long serialVersionUID = -4659657335097876554L;
 
 	private JPanel contentPane;
 	JButton buttonPC;
 	JButton buttonNewG;
-	JButton buttonLoad ;
+	JButton buttonLoad;
 	JButton buttonJoin;
+
 	/**
 	 * Create the Home Frame.
 	 */
@@ -88,36 +87,40 @@ public class FrameHome extends JFrame {
 		buttonJoin.setBounds(334, 271, 127, 23);
 		contentPane.add(buttonJoin);
 	}
+
 	/**
 	 * Add an ActionListener to the button buttonPC
+	 * 
 	 * @param listener ActionListener
 	 */
-	public void addButtonPcListener( ActionListener listener )
-	{
+	public void addButtonPcListener(ActionListener listener) {
 		this.buttonPC.addActionListener(listener);
 	}
+
 	/**
 	 * Add an ActionListener to the button buttonNewG
+	 * 
 	 * @param listener ActionListener
 	 */
-	public void addButtonNewGListener( ActionListener listener )
-	{
+	public void addButtonNewGListener(ActionListener listener) {
 		this.buttonNewG.addActionListener(listener);
 	}
+
 	/**
 	 * Add an ActionListener to the button buttonLoad
+	 * 
 	 * @param listener ActionListener
 	 */
-	public void adButtonLoadListener( ActionListener listener )
-	{
+	public void adButtonLoadListener(ActionListener listener) {
 		this.buttonLoad.addActionListener(listener);
 	}
+
 	/**
 	 * Add an ActionListener to the button buttonJoin
+	 * 
 	 * @param listener ActionListener
 	 */
-	public void addButtonJoinListener( ActionListener listener )
-	{
+	public void addButtonJoinListener(ActionListener listener) {
 		this.buttonJoin.addActionListener(listener);
 	}
 }
