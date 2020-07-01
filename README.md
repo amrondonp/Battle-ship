@@ -1,8 +1,15 @@
-BattleShip
-==========
+# Java BattleShip Game
 
-is a java game of battleship with two game modes of play, CPU vs MAN and MAN vs MAN on a LAN network.
+Battle ship game implemented in java. You can play against the AI, also against your friends over the network!
 
-Note: the program uses Processing
+### Screenshots
 
-Authors: Mauricio Rondon and Julian Pulido 
+Main activity - game
+![alt text](documentation/main-activity.png "Screenshot of the main activity")
+
+Main menu
+![alt text](documentation/main-menu.png "Screenshot of the main activity")
+
+### Download - Demo
+
+You can find a demo version on our releases.
